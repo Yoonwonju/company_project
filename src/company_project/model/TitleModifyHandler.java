@@ -1,8 +1,7 @@
 package company_project.model;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.List;
+import java.io.InputStreamReader;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -12,17 +11,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 
 import company_project.dto.Title;
 import company_project.service.TitleService;
 
-@WebServlet("/TitleListHandler")
-public class TitleListHandler extends HttpServlet {
+@WebServlet("/TitleModifyHandler")
+public class TitleModifyHandler extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	private TitleService service;
-       
+
 	public void init(ServletConfig config) throws ServletException {
 		service = new TitleService();
 	}
@@ -35,26 +33,18 @@ public class TitleListHandler extends HttpServlet {
 		process(request, response);
 	}
 	
-	private void process(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	private void process(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		if(request.getMethod().equalsIgnoreCase("get")) {
 			System.out.println("GET방식");
-			List<Title> list = service.showTitles();
-			request.setAttribute("list", list);
-			request.getRequestDispatcher("titleList.jsp").forward(request, response);
 		}else {
-			System.out.println("POST방식");
-			List<Title> list = service.showTitles();	// Object>json : toJson
+			System.out.println("POST방식");	// json>Object : fromJson
 			Gson gson = new Gson();
-			String result = gson.toJson(list, new TypeToken<List<Title>>() {}.getType());
-			System.out.println(result);
+			Title newTitle = gson.fromJson(new InputStreamReader(request.getInputStream(),"UTF-8"), Title.class);
+			System.out.println(newTitle);
 			
-			response.setContentType("application/json");
-			response.setStatus(HttpServletResponse.SC_ACCEPTED);
-			
-			PrintWriter pw = response.getWriter();
-			pw.print(result);
+			int res = service.modifyTitle(newTitle);
+			response.getWriter().print(res);
 		}
-		
 	}
 
 }
