@@ -7,8 +7,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.management.RuntimeErrorException;
-
 import company_project.dao.TitleDao;
 import company_project.ds.JdbcUtilJNDI;
 import company_project.dto.Title;
