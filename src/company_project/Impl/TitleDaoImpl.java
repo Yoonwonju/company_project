@@ -114,7 +114,7 @@ public class TitleDaoImpl implements TitleDao {
 				return rs.getInt(1);
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw new RuntimeException();
 		}
 		return 0;
 	}

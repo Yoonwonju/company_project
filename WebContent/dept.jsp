@@ -21,7 +21,6 @@
 						deptNo: $('#deptNo').val(),
 						deptName: $('#deptName').val(),
 						floor: $('#floor').val()};
-				alert("else2");
 				$.ajax({
 					type:"post",
 					url:"DeptModifyHandler",

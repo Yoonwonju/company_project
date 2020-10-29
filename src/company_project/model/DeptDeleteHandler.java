@@ -35,7 +35,7 @@ public class DeptDeleteHandler extends HttpServlet {
 		if (request.getMethod().equalsIgnoreCase("get")) {
 			System.out.println("GET방식");
 			int deptNo = Integer.parseInt(request.getParameter("deptNo").trim());
-			int res = service.removeDepartment(new Department(deptNo));
+			int res = service.removeDept(new Department(deptNo));
 			System.out.println("9999");
 			response.getWriter().print(res); // goto dept.jsp의 ajax
 		} else {

@@ -23,6 +23,10 @@
 				}
 			})
 		})
+		$('#cancel').on("click", function(){
+			alert("취소");
+			window.location.href="TitleListHandler";
+		})
 	})
 </script>
 </head>

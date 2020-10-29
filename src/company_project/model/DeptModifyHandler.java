@@ -46,7 +46,7 @@ public class DeptModifyHandler extends HttpServlet {
 		Department newDept = gson.fromJson(new InputStreamReader(request.getInputStream(), "UTF-8"), Department.class);
 		System.out.println(newDept);
 		
-		int res = service.modifyDepartment(newDept);
+		int res = service.modifyDept(newDept);
 		response.getWriter().print(res);
 	}
 

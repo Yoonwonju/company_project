@@ -17,15 +17,15 @@ public class DepartmentService {
 		return deptDao.selectDepartmentByNo(dept);
 	}
 
-	public int addDepartment(Department dept) {
+	public int addDept(Department dept) {
 		return deptDao.insertDepartment(dept);
 	}
 	
-	public int modifyDepartment(Department dept) {
+	public int modifyDept(Department dept) {
 		return deptDao.updateDepartment(dept);
 	}
 	
-	public int removeDepartment(Department dept) {
+	public int removeDept(Department dept) {
 		return deptDao.deleteDepartment(dept);
 	}
 	
