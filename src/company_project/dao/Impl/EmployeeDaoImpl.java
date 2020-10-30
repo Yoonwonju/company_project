@@ -1,11 +1,11 @@
-package company_project.Impl;
+package company_project.dao.Impl;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import company_project.dao.EmployeeDao;
@@ -29,7 +29,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
 	@Override
 	public List<Employee> selectEmployeeByAll() {
 		String sql = "SELECT EMP_NO , EMP_NAME , TNO , MANAGER , SALARY , DNO , EMAIL , TEL , REGDATE , PIC_URI,\r\n"
-				+ "	   TITLE_NAME , DEPT_NAME , EMP_NAME\r\n"
+				+ "	   TITLE_NAME , DEPT_NAME , MANAGER_NAME\r\n"
 				+ "  FROM VM_EMPLOYEE_JOIN";
 			try(Connection con = JdbcUtilJNDI.getConnection();
 					PreparedStatement pstmt = con.prepareStatement(sql);
@@ -59,38 +59,74 @@ public class EmployeeDaoImpl implements EmployeeDao {
 		String passwd = null;
 		Date regDate = rs.getDate("REGDATE");
 		String tel = rs.getString("TEL");
-		String picUrl = rs.getString("PIC_URL");
+		String picUri = rs.getString("PIC_URI");
 		
 		try {
 			passwd = rs.getString("PASSWD");
 		}catch(SQLException e) {
-			
 		}
 		try {
 			String titleName = rs.getString("TITLE_NAME");
 			title.setTitleName(titleName);
 		}catch(SQLException e) {
-			
 		}
 		try {
 			String deptName = rs.getString("DEPT_NAME");
 			dept.setDeptName(deptName);
 		}catch(SQLException e) {
-			
 		}
 		try {
 			String managerName = rs.getString("MANAGER_NAME");
 			manager.setEmpName(managerName);
 		}catch(SQLException e) {
-			
 		}
 		
-		Employee emp = new Employee(empNo, empName, title, manager, salary, dept, email, passwd, regDate, tel, picUrl);
+		Employee emp = new Employee(empNo, empName, title, manager, salary, dept, email, regDate, tel, picUri);
 		if(passwd != null) {
 			emp.setPasswd(passwd);
 		}
-		
 		return emp;
 	}
 
+	@Override
+	public Employee selectEmployeeByNo(Employee empl) {
+		String sql = "SELECT EMP_NO , EMP_NAME , TNO , MANAGER , SALARY , DNO , EMAIL , TEL , REGDATE , PIC_URI,\r\n"
+				+ "	   TITLE_NAME , DEPT_NAME , MANAGER_NAME\r\n"
+				+ "  FROM VM_EMPLOYEE_JOIN\r\n"
+				+ " WHERE EMP_NO = ?";
+		try(Connection con = JdbcUtilJNDI.getConnection();
+				PreparedStatement pstmt = con.prepareStatement(sql);){
+			pstmt.setInt(1, empl.getEmpNo());
+			try(ResultSet rs = pstmt.executeQuery();){
+				if(rs.next()) {
+					return getEmployee(rs);
+				}
+			}
+		} catch (SQLException e) {
+			throw new RuntimeException();
+		}
+		return null;
+	}
+
+	@Override
+	public int insertEmployee(Employee empl) {
+		String sql ="INSERT INTO EMPLOYEE (EMP_NO, EMP_NAME, TNO, MANAGER, SALARY, DNO, EMAIL, PASSWD, TEL)\r\n"
+				+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+		try(Connection con = JdbcUtilJNDI.getConnection();
+				PreparedStatement pstmt = con.prepareStatement(sql);){
+			pstmt.setInt(1, empl.getEmpNo());
+			pstmt.setString(2, empl.getEmpName());
+			pstmt.setInt(3, empl.getTitle().getTitleNo());
+			pstmt.setInt(4, empl.getManager().getEmpNo());
+			pstmt.setInt(5, empl.getSalary());
+			pstmt.setInt(6, empl.getDept().getDeptNo());
+			pstmt.setString(7, empl.getEmail());
+			pstmt.setString(8, empl.getPasswd());
+			pstmt.setString(9, empl.getTel());
+			
+			return pstmt.executeUpdate();
+		} catch (SQLException e) {
+			throw new RuntimeException();
+		}
+	}
 }

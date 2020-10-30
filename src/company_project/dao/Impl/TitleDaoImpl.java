@@ -1,4 +1,4 @@
-package company_project.Impl;
+package company_project.dao.Impl;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

@@ -1,0 +1,23 @@
+@charset "UTF-8";
+
+
+ table {
+    width: 100%;
+    border-top: 3px solid black;
+    border-collapse: collapse;
+  }
+  
+thead td{
+   border: 1px solid #ddd;
+   font-weight: bolder;
+   background-color: skyblue;
+}
+
+h2{
+	text-align: center;
+}
+tr, td{
+   border: 1px solid #ddd; 
+    padding: 10px;
+   text-align: center;
+}

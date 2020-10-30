@@ -2,8 +2,8 @@ package company_project.service;
 
 import java.util.List;
 
-import company_project.Impl.DepartmentDaoImpl;
 import company_project.dao.DepartmentDao;
+import company_project.dao.Impl.DepartmentDaoImpl;
 import company_project.dto.Department;
 
 public class DepartmentService {

@@ -2,8 +2,8 @@ package company_project.service;
 
 import java.util.List;
 
-import company_project.Impl.TitleDaoImpl;
 import company_project.dao.TitleDao;
+import company_project.dao.Impl.TitleDaoImpl;
 import company_project.dto.Title;
 
 public class TitleService {

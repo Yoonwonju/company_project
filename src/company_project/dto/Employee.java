@@ -1,6 +1,6 @@
 package company_project.dto;
 
-import java.sql.Date;
+import java.util.Date;
 
 public class Employee {
 	private int empNo;
@@ -13,7 +13,7 @@ public class Employee {
 	private String passwd;
 	private Date regDate;
 	private String tel;
-	private String picUrl;
+	private String picUri;
 
 	public Employee() {
 		super();
@@ -21,7 +21,7 @@ public class Employee {
 	}
 
 	public Employee(int empNo, String empName, Title title, Employee manager, int salary, Department dept, String email,
-			String passwd, Date regDate, String tel, String picUrl) {
+			String passwd, Date regDate, String tel, String picUri) {
 		super();
 		this.empNo = empNo;
 		this.empName = empName;
@@ -33,19 +33,34 @@ public class Employee {
 		this.passwd = passwd;
 		this.regDate = regDate;
 		this.tel = tel;
-		this.picUrl = picUrl;
+		this.picUri = picUri;
 	}
 
-	public Employee(int empNo) {
+	public Employee(int empNo, String empName, Title title, Employee manager, int salary, Department dept, String email,
+			Date regDate, String tel, String picUri) {
 		super();
 		this.empNo = empNo;
+		this.empName = empName;
+		this.title = title;
+		this.manager = manager;
+		this.salary = salary;
+		this.dept = dept;
+		this.email = email;
+		this.regDate = regDate;
+		this.tel = tel;
+		this.picUri = picUri;
 	}
 
 	@Override
 	public String toString() {
 		return String.format(
-				"Employee [empNo=%s, empName=%s, title=%s, manager=%s, salary=%s, dept=%s, email=%s, passwd=%s, regDate=%s, tel=%s, picUrl=%s]",
-				empNo, empName, title, manager, salary, dept, email, passwd, regDate, tel, picUrl);
+				"Employee [empNo=%s, empName=%s, title=%s, manager=%s, salary=%s, dept=%s, email=%s, passwd=%s, regDate=%s, tel=%s, picUri=%s]",
+				empNo, empName, title, manager, salary, dept, email, passwd, regDate, tel, picUri);
+	}
+
+	public Employee(int empNo) {
+		super();
+		this.empNo = empNo;
 	}
 
 	public int getEmpNo() {
@@ -128,12 +143,12 @@ public class Employee {
 		this.tel = tel;
 	}
 
-	public String getPicUrl() {
-		return picUrl;
+	public String getPicUri() {
+		return picUri;
 	}
 
-	public void setPicUrl(String picUrl) {
-		this.picUrl = picUrl;
+	public void setPicUri(String picUri) {
+		this.picUri = picUri;
 	}
 
 }

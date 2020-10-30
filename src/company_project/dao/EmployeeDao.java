@@ -6,4 +6,8 @@ import company_project.dto.Employee;
 
 public interface EmployeeDao {
 	List<Employee> selectEmployeeByAll();
+
+	Employee selectEmployeeByNo(Employee empl);
+	
+	int insertEmployee(Employee empl);
 }

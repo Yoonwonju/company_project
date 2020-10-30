@@ -9,7 +9,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import company_project.Impl.TitleDaoImpl;
+import company_project.dao.Impl.TitleDaoImpl;
 import company_project.dto.Title;
 
 public class TitleDaoTest {
