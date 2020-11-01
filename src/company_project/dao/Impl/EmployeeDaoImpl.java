@@ -129,4 +129,21 @@ public class EmployeeDaoImpl implements EmployeeDao {
 			throw new RuntimeException();
 		}
 	}
+
+	@Override
+	public int idDupCheck(int empNo) {
+		String sql = "SELECT EMP_NO FROM EMPLOYEE WHERE EMP_NO = ?";
+		try(Connection con = JdbcUtilJNDI.getConnection();
+				PreparedStatement pstmt = con.prepareStatement(sql);){
+			pstmt.setInt(1, empNo);
+			try(ResultSet rs = pstmt.executeQuery()){
+				if(rs.next()) {
+					return 0;
+				}
+			}
+		} catch (SQLException e) {
+			throw new RuntimeException();
+		}
+		return 1;
+	}
 }

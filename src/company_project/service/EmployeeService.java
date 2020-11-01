@@ -21,4 +21,8 @@ public class EmployeeService {
 		return empDao.insertEmployee(empl);
 	}
 
+	public int duplicateEmpNo(int empNo) {
+		return empDao.idDupCheck(empNo);
+	}
+
 }

@@ -8,6 +8,7 @@
 <head>
 <meta charset="UTF-8">
 <title>사원목록</title>
+<link rel="stylesheet" href="css/emplist.css">
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script type="text/javascript">
  $(function(){
@@ -62,7 +63,6 @@
 	 })
  })
 </script>
-<link rel="stylesheet" href="css/emplist.css">
 </head>
 <body>
 ${list }<hr>

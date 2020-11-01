@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>직책목록</title>
+<link rel="stylesheet" href="css/emplist.css">
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script type="text/javascript">
 	$(function(){

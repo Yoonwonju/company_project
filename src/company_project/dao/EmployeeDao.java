@@ -10,4 +10,6 @@ public interface EmployeeDao {
 	Employee selectEmployeeByNo(Employee empl);
 	
 	int insertEmployee(Employee empl);
+
+	int idDupCheck(int empNo);
 }
