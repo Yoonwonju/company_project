@@ -20,6 +20,12 @@ public class Employee {
 		// TODO Auto-generated constructor stub
 	}
 
+	public Employee(int empNo, String empName) {
+		super();
+		this.empNo = empNo;
+		this.empName = empName;
+	}
+
 	public Employee(int empNo, String empName, Title title, Employee manager, int salary, Department dept, String email,
 			String passwd, Date regDate, String tel, String picUri) {
 		super();

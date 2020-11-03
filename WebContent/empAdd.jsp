@@ -10,24 +10,24 @@
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script type="text/javascript">
 	$(function(){
-		$.post('TitleListHandler', function(){
+		$.post('TitleListHandler', function(json){
 			var dataLength = json.length;
 			if(dataLength >= 1){
 				var sCont = "";
 				sCont += "<option value='' disabled selected hidden>직책을 선택하세요!</option>";
-				for(i = 1; i < dataLength; i++){
+				for(i = 0; i < dataLength; i++){
 					sCont += "<option value=" + json[i].titleNo + ">" + json[i].titleName + "</>";
 				}
 				$("#title").append(sCont);
 			}
 		})
 		
-		$.post('DeptListHandler', function(){
+		$.post('DeptListHandler', function(json){
 			var dataLength = json.length;
 			if(dataLength >= 1){
 				var sCont = '';
 				sCont += "<option value='' disabled selected hidden>부서를 선택하세요!</option>";
-				for(i = 1; i < dataLength; i++){
+				for(i = 0; i < dataLength; i++){
 					sCont += "<option value=" + json[i].deptNo + ">" + json[i].deptName + "</>";
 				}
 				$("#dept").append(sCont);

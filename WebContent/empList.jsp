@@ -12,7 +12,7 @@
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script type="text/javascript">
  $(function(){
-	 $.post("TitleListHandler", function(json){
+	 $.post('TitleListHandler', function(json){
 		 var dataLength = json.length;
 		 if(dataLength >= 1){
 			 var sCont = "";
@@ -23,7 +23,7 @@
 		 }
 	 })
 	 
-	 $.post("DeptListHandler", function(json){
+	 $.post('DeptListHandler', function(json){
 		 var dataLength = json.length;
 		 if(dataLength >= 1){
 			 var sCont = "";
@@ -38,7 +38,7 @@
 		 self.location = "empAdd.jsp";
 	 })
 	 
-	 $.post("EmpListHandler", function(json){
+	 $.post('EmpListHandler', function(json){
 		 var dataLength = json.length
 		 if(dataLength >= 1){
 			 var sCont = "";
@@ -58,7 +58,7 @@
 				 sCont += "</tr>"
 			 }
 			 /* $("table > tbody:last-child").append(sCont);    */
-	         $("#load:last-child").append(sCont);
+	         /* $("#load:last-child").append(sCont); */
 		 }
 	 })
  })
@@ -81,7 +81,7 @@ ${list }<hr>
 			<td>이메일</td>
 			<td>연락처</td>
 		</thead>
-		<tbody>
+		<tbody id = load>
 			<c:forEach var="emp" items="${list }">
 				<tr>
 					<td>${emp.empNo } </td>

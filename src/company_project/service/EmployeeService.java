@@ -4,6 +4,7 @@ import java.util.List;
 
 import company_project.dao.EmployeeDao;
 import company_project.dao.Impl.EmployeeDaoImpl;
+import company_project.dto.Department;
 import company_project.dto.Employee;
 
 public class EmployeeService {
@@ -23,6 +24,18 @@ public class EmployeeService {
 
 	public int duplicateEmpNo(int empNo) {
 		return empDao.idDupCheck(empNo);
+	}
+
+	public List<Employee> getManagerListByDno(Department dept) {
+		return empDao.selectMangerListByDno(dept);
+	}
+
+	public int modifyEmployee(Employee empl) {
+		return empDao.updateEmployee(empl);
+	}
+	
+	public int removeEmployee(Employee empl) {
+		return empDao.deleteEmployee(empl);
 	}
 
 }

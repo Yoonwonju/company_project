@@ -146,4 +146,59 @@ public class EmployeeDaoImpl implements EmployeeDao {
 		}
 		return 1;
 	}
+
+	@Override
+	public List<Employee> selectMangerListByDno(Department dept) {
+		String sql = "SELECT EMP_NO , EMP_NAME FROM EMPLOYEE WHERE DNO = ?";
+		try(Connection con = JdbcUtilJNDI.getConnection();
+				PreparedStatement pstmt = con.prepareStatement(sql)){
+			pstmt.setInt(1, dept.getDeptNo());
+			try(ResultSet rs = pstmt.executeQuery()){
+				if(rs.next()) {
+					List<Employee> list = new ArrayList<Employee>();
+					do {
+						list.add(new Employee(rs.getInt("EMP_NO"), rs.getString("EMP_NAME")));
+					}while(rs.next());
+					return list;
+				}
+			}
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+		return null;
+	}
+
+	@Override
+	public int updateEmployee(Employee empl) {
+		String sql = "UPDATE EMPLOYEE SET EMP_NAME=?, TNO=?, MANAGER=?, SALARY=?, DNO=?, EMAIL=?, PASSWD=?, TEL=? WHERE EMP_NO = ?";
+		try(Connection con = JdbcUtilJNDI.getConnection();
+				PreparedStatement pstmt = con.prepareStatement(sql);){
+			pstmt.setString(1, empl.getEmpName());
+			pstmt.setInt(2, empl.getTitle().getTitleNo());
+			pstmt.setInt(3, empl.getManager().getEmpNo());
+			pstmt.setInt(4, empl.getSalary());
+			pstmt.setInt(5, empl.getDept().getDeptNo());
+			pstmt.setString(6, empl.getEmail());
+			pstmt.setString(7, empl.getPasswd());
+			pstmt.setString(8, empl.getTel());
+			pstmt.setInt(9, empl.getEmpNo());
+			
+			return pstmt.executeUpdate();
+		} catch (SQLException e) {
+			throw new RuntimeException();
+		}
+	}
+
+	@Override
+	public int deleteEmployee(Employee empl) {
+		String sql = "DELETE FROM EMPLOYEE WHERE EMP_NO = ?";
+		try(Connection con = JdbcUtilJNDI.getConnection();
+				PreparedStatement pstmt = con.prepareStatement(sql)){
+			pstmt.setInt(1, empl.getEmpNo());
+			
+			return pstmt.executeUpdate();
+		} catch (SQLException e) {
+			throw new RuntimeException();
+		}
+	}
 }

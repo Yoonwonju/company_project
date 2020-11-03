@@ -47,7 +47,7 @@ public class DeptListHandler extends HttpServlet {
 			List<Department> list = service.selectDepartmentByAll();	//object>json : toJson
 			Gson gson = new Gson();
 			String result = gson.toJson(list, new TypeToken<List<Department>>() {}.getType());
-			System.out.println(result);
+			System.out.println("result >> " + result);
 			
 			response.setContentType("application/json");
 			response.setStatus(HttpServletResponse.SC_ACCEPTED);

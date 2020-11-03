@@ -35,14 +35,14 @@
 				var updateEmp={
 						empNo:$('#empNo').val(),
 						empName:$('#empName').val(),
-						dept:{deptNo:$('#dept').val()},
-						manager:{empNo:$('#manager').val()},
 						title:{titleNo:$('#title').val()},
+						manager:{empNo:$('#manager').val()},
 						salary:$('#salary').val(),
-						regDate:$('#regDate').val(),
+						dept:{deptNo:$('#dept').val()},
 						email:$('#email').val(),
-						tel:$('#tel').val(),
-						passwd:$('#passwd').val()
+						passwd:$('#passwd').val(),
+						regDate:$('#regDate').val(),
+						tel:$('#tel').val()
 				}
 				$.ajax({
 					type:"post",
@@ -58,42 +58,7 @@
 			}
 		});
 		
-/* 		$.post("DeptListHandler", function(json){
-			var deptSelected = ${emp.dept.deptNo};
-			var dataLength = json.length;
-			if(dataLength >= 1){
-				var sCont = "<option value='' disabled selected hidden>부서를 선택하세요! </option>";
-				for(i = 0; i < dataLength; i++){
-					sCont += "<option value=" + json[i].deptNo;
-					if(deptSelected == json[i].deptNo){
-						sCont += " selected ";
-					}
-					sCont += ">" + json[i].deptName + "</>";
-				}
-				$('#dept').append(sCont);
-			}
-		})
-		
-		$.post("EmpManagerListHandler", function(json){
-			var dataLength = json.length;
-			var managerNo = ${emp.manager.empNo};
-			if(dataLength >= 1){
-				var sCont = "<option value='' disabled selected hidden>직속상사를 선택하세요! </option>";
-				if(i = 0; i < dataLength; i++){
-					sCont += "<option value=" + json[i].empNo;
-					if(managerNo == json[i].empNo){
-						sCont += " selected ";
-					}
-					sCont += ">" + json[i].empName + "</>";
-				}
-				${'#manager'}.append(sCont);
-			}
-		}) */
-		
-		
-		
-		
-/* 		$.post("TitleListHandler", function(json){
+		$.post('TitleListHandler', function(json){
 			var titleSelected = ${emp.title.titleNo};
 			var dataLength = json.length;
 			if(dataLength >= 1){
@@ -104,12 +69,45 @@
 					if(titleSelected == json[i].titleNo){
 						sCont += " selected ";
 					}
-					sCont += ">" + json[i].titleName + "</>";
+					sCont += " >" + json[i].titleName + "</>";
 				}
 				$('#title').append(sCont);
 			}
-		}) */
+		})
 		
+		$.post('DeptListHandler', function(json){
+			var deptSelected = ${emp.dept.deptNo};
+			var dataLength = json.length;
+			if(dataLength >= 1){
+				
+				var sCont = "<option value='' disabled selected hidden>부서를 선택하세요! </option>";
+				for(i = 0; i < dataLength; i++){
+					sCont += "<option value=" + json[i].deptNo;
+					if(deptSelected == json[i].deptNo){
+						sCont += " selected ";
+					}
+					sCont += " >" + json[i].deptName + "</>";
+				}
+				$('#dept').append(sCont);
+			}
+		})
+
+		$.post('EmpManagerListHandler', function(json){
+			var dataLength = json.length;
+			var managerNo = ${emp.manager.empNo};
+			if (dataLength >= 1) {
+				var sCont = "<option value='' disabled selected hidden>직속상사를 선택하세요! </option>";
+				for(i = 0; i < dataLength; i++){
+					sCont += "<option value=" + json[i].empNo;
+					if(managerNo == json[i].empNo){
+						sCont += " selected ";
+					}
+					sCont += " >" + json[i].empName + "</>";
+				}
+				$('#manager').append(sCont);
+			}
+		})  
+
 		$('#dept').on('change', function(){
 			alert($('#dept').val());
 			var selectedManager = ${emp.manager.empNo};
@@ -120,11 +118,10 @@
 			$.get('EmpManagerListHandler', dept, function(json){
 				var dataLength = json.length;
 				if(dataLength >= 1){
-					alert(data);
 					var sCont="";
 					for(i = 0; i < dataLength; i++){
 						sCont += "<option value=" + json[i].empNo;
-						if(selectManager == json[i].empNo){
+						if(selectedManager == json[i].empNo){
 							sCont += " selected ";
 						}
 						sCont += ">" + json[i].empName + "</>";
@@ -141,7 +138,8 @@
 		
 		$('#delete').on('click', function(){
 			alert("삭제");
-			var delEmp = {empNo:$('#empNo').val()}
+			var delEmp = {empNo:$('#empNo').val()};
+			
 			$.ajax({
 				type:"get",
 				url:"EmpDeleteHandler",
